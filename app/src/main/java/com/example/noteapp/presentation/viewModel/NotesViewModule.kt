@@ -1,5 +1,6 @@
 package com.example.noteapp.presentation.viewModel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.data.Notes
@@ -20,12 +21,22 @@ class NotesViewModule(
     private val getAllNotesUseCase: GetAllNotesUseCase
 ):ViewModel() {
 
+    // Поток заметок
     val notesFlow: StateFlow<List<Notes>> = getAllNotesUseCase()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
+    init {
+        viewModelScope.launch {
+            notesFlow.collect { notes ->
+                Log.d("NotesViewModule", "Notes loaded: $notes")
+            }
+        }
+    }
+
     fun addNote(notes: Notes){
         viewModelScope.launch {
-           insertNotesUseCase(notes)
+            Log.d("NotesViewModule", "Adding note: $notes")
+            insertNotesUseCase(notes)
         }
     }
 

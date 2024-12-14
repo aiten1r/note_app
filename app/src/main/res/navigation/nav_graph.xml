@@ -7,5 +7,19 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.noteapp.presentation.fragments.MainFragment"
-        android:label="Main" />
+        android:label="Main" >
+        <action
+            android:id="@+id/action_mainFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.noteapp.presentation.fragments.DetailsFragment"
+        android:label="DetailsFragment" />
+    <argument android:name="notesTitle"
+        app:argType="string"/>
+    <argument android:name="notesDescripton"
+        app:argType="string"/>
+    <argument android:name="notesTime"
+        app:argType="string"/>
 </navigation>

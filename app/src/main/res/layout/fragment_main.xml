@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/mainFragment"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black"
-    android:orientation="vertical">
+    android:background="@color/black">
 
-
-    <com.google.android.material.search.SearchView
-        android:id="@+id/sv_listitem"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/main_item"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:queryHint="Поиск заметок"
-        app:iconifiedByDefault="true">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/main_item"/>
-
-    </com.google.android.material.search.SearchView>
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="90dp"
+        android:layout_marginEnd="50dp"
+        android:src="@drawable/fab_icon"
+        app:fabSize="normal"
+        android:backgroundTint="@color/fabBackGraundColor"/>
 
 
-</LinearLayout>
+</FrameLayout>

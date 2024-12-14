@@ -1,6 +1,8 @@
 package com.example.noteapp.presentation.activitys
 
+import android.icu.text.CaseMap.Title
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -40,6 +42,16 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController,appBarConfiguration)
 
+        navController.addOnDestinationChangedListener{_,destination,_->
+            when (destination.id){
+                R.id.mainFragment ->{
+                    binding.toolbar.visibility = View.VISIBLE
+                }
+                R.id.detailsFragment ->{
+                    binding.toolbar.visibility = View.GONE
+                }
+            }
+        }
 
     }
 

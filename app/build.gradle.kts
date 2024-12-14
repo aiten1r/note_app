@@ -47,12 +47,11 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.8.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.8.5")
 
-    //koin
-    implementation ("io.insert-koin:koin-android:3.5.0")
-
-
     // Koin для Android
-    implementation ("io.insert-koin:koin-android:4.0.0")
+    implementation("io.insert-koin:koin-android:3.5.0") // Основная библиотека Koin
+    implementation("io.insert-koin:koin-androidx-workmanager:3.5.0") // (если используете WorkManager)
+    implementation("io.insert-koin:koin-androidx-navigation:3.5.0") // Для навигации
+    implementation("io.insert-koin:koin-androidx-compose:3.5.0")
 
 
     implementation(libs.androidx.core.ktx)
