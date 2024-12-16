@@ -1,13 +1,16 @@
 package com.example.noteapp.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.domain.data.Notes
+import com.example.noteapp.R
 import com.example.noteapp.databinding.DetailsFragmentBinding
 import com.example.noteapp.presentation.viewModel.NotesViewModule
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,10 +22,10 @@ class DetailsFragment : Fragment() {
 
     private var _binding: DetailsFragmentBinding? = null
     private val binding get() = _binding!!
-    private var selectedColor: String = "grey" // Цвет по умолчанию
+    private val notesViewModule: NotesViewModule by viewModel()
+    private val args: DetailsFragmentArgs by navArgs()
 
-    private val notesViewModule:NotesViewModule by viewModel()
-
+    private var selectedColor: String = "white" // Цвет по умолчанию
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,36 +39,71 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val monthFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
-        val timeformate = SimpleDateFormat("HH:mm", Locale.getDefault())
-        val currentDate = Date()
+        val id = args.id
+        val title = args.title
+        val descripton = args.description
+        val date = args.date
+        val color = args.color
 
-        // Форматированная строка для даты
-        val formattedDate = "${monthFormat.format(currentDate)} ${timeformate.format(currentDate)}"
+        if (id != 0) {
 
-        binding.dateMonth.text = monthFormat.format(currentDate)
-        binding.dateTime.text = timeformate.format(currentDate)
-
+            binding.edTitle.setText(title)
+            binding.edDescription.setText(descripton)
+            binding.arivedText.text = date
+            selectedColor = color
+            setSelectedColor(color)
+            binding.arivedText.visibility = View.VISIBLE
+        }
         // Настройка выбора цвета
         setupColorSelection()
 
-        binding.actionDo.setOnClickListener {
-            val title = binding.edTitle.text.toString()
-            val description = binding.edDescription.text.toString()
+        val curentDate = SimpleDateFormat("dd MMMM", Locale.getDefault()).format(Date())
+        binding.curentDate.text = curentDate
 
-            if (title.isNotEmpty() && description.isNotEmpty()) {
-                val notes = Notes(
-                    id = 0,
-                    title = title,
-                    description = description,
-                    date = formattedDate,
-                    color = selectedColor // Сохраняем выбранный цвет
-                )
-                notesViewModule.addNote(notes)
-                findNavController().navigateUp()
-            }else{
+        binding.actionDo.setOnClickListener {
+            val updateTitle = binding.edTitle.text.toString()
+            val updateDescription = binding.edDescription.text.toString()
+
+            if (updateTitle.isNotEmpty() && updateDescription.isNotEmpty()) {
+                val savedDate = SimpleDateFormat("dd:MM:yy", Locale.getDefault()).format(Date())
+                if (id == 0) {
+                    // Создание новой заметки
+                    val addNotes = Notes(
+                        id = 0,
+                        title = updateTitle,
+                        description = updateDescription,
+                        date = savedDate,
+                        color = selectedColor
+                    )
+                    notesViewModule.addNote(addNotes)
+                } else {
+                    // Обновление существующей заметки
+                    val updateNotes = Notes(
+                        id = id,
+                        title = updateTitle,
+                        description = updateDescription,
+                        date = savedDate,
+                        color = selectedColor
+                    )
+                    notesViewModule.updateNote(updateNotes)
+                }
+                findNavController().navigateUp() // Вернуться на предыдущий экран
+            } else{
                 Toast.makeText(requireContext(), "Заполните все поля", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        binding.goToBackstep.setOnClickListener{
+            findNavController().navigateUp()
+        }
+    }
+
+    private fun setSelectedColor(color: String) {
+        resetColorSelection()
+        when (color) {
+            "white" -> binding.btnWhite.isSelected = true
+            "grey" -> binding.btnGrey.isSelected = true
+            "red" -> binding.btnRed.isSelected = true
         }
     }
 

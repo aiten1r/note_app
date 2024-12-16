@@ -2,10 +2,13 @@ package com.example.noteapp.presentation.activitys
 
 import android.icu.text.CaseMap.Title
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
@@ -36,11 +39,15 @@ class MainActivity : AppCompatActivity() {
         // Настраиваем ActionBar
         NavigationUI.setupWithNavController(binding.navigationView, navController)
 
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.mainFragment), // Главные фрагменты (где гамбургер-меню вместо "Назад")
-            binding.drawerLayout
-        )
-        setupActionBarWithNavController(navController,appBarConfiguration)
+//        val appBarConfiguration = AppBarConfiguration(
+//            setOf(R.id.mainFragment), // Главные фрагменты (где гамбургер-меню вместо "Назад")
+//            binding.drawerLayout
+//        )
+        setupActionBarWithNavController(navController)
+
+        binding.toolbar.setNavigationOnClickListener {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
 
         navController.addOnDestinationChangedListener{_,destination,_->
             when (destination.id){
@@ -52,9 +59,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
-
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }

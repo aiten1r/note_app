@@ -3,14 +3,17 @@ package com.example.noteapp.presentation.viewModel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.data.mappers.toEntityModel
 import com.example.domain.data.Notes
 import com.example.domain.repository.NotesRepository
 import com.example.domain.usecase.DeletNotesUseCase
 import com.example.domain.usecase.GetAllNotesUseCase
 import com.example.domain.usecase.InsertNotesUseCase
 import com.example.domain.usecase.UpdateNotesUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -21,14 +24,13 @@ class NotesViewModule(
     private val getAllNotesUseCase: GetAllNotesUseCase
 ):ViewModel() {
 
-    // Поток заметок
-    val notesFlow: StateFlow<List<Notes>> = getAllNotesUseCase()
-        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+    private val _notesState = MutableStateFlow<List<Notes>>(emptyList())
+    val notesState: StateFlow<List<Notes>> = _notesState.asStateFlow()
 
     init {
         viewModelScope.launch {
-            notesFlow.collect { notes ->
-                Log.d("NotesViewModule", "Notes loaded: $notes")
+            getAllNotesUseCase().collect { notes ->
+                _notesState.value = notes
             }
         }
     }

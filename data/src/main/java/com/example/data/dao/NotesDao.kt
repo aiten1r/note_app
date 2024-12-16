@@ -8,6 +8,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.example.data.entity.NotesEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 @Dao
 interface NotesDao {
@@ -23,7 +24,6 @@ interface NotesDao {
 
     @Query("SELECT * FROM notes ORDER BY date DESC")
     fun getAllNotes(): Flow<List<NotesEntity>>
-
 
 
 }

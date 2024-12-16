@@ -12,36 +12,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
+        android:padding="4dp"
         android:src="@drawable/icon_backstasc"
         app:layout_constraintBottom_toTopOf="@+id/ed_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/date_month"
+        android:id="@+id/curentDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
-        android:text="30 мая"
+        android:text="14.декабря"
         android:textColor="@color/edTextColor"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/go_to_backstep"
         app:layout_constraintStart_toEndOf="@+id/go_to_backstep"
         app:layout_constraintTop_toTopOf="@+id/go_to_backstep" />
-
-    <TextView
-        android:id="@+id/date_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="14:30"
-        android:textColor="@color/edHintColor"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/date_month"
-        app:layout_constraintStart_toEndOf="@+id/date_month"
-        app:layout_constraintTop_toTopOf="@+id/date_month" />
 
     <TextView
         android:id="@+id/action_do"
@@ -50,11 +38,25 @@
         android:layout_marginEnd="24dp"
         android:text="Готово"
         android:textColor="@color/iconDoneColor"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/date_time"
+        app:layout_constraintBottom_toBottomOf="@+id/curentDate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/date_time" />
+        app:layout_constraintTop_toTopOf="@+id/curentDate" />
+
+    <TextView
+        android:id="@+id/arived_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="12dp"
+        android:visibility="gone"
+        android:text="14.Декобря"
+        android:alpha="0.3"
+        android:textColor="@color/edHintColor"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ed_title" />
 
     <EditText
         android:id="@+id/ed_title"
@@ -62,11 +64,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
-        android:maxLength="30"
+        android:gravity="center"
+        android:background="@android:color/transparent"
         android:hint="Нужно зделать:"
+        android:maxLength="30"
         android:textColor="@color/edTextColor"
         android:textColorHint="@color/edHintColor"
-        android:textSize="12sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,25 +81,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="20dp"
         android:background="@null"
         android:hint="Описание заметки:"
         android:textColor="@color/edTextColor"
         android:textColorHint="@color/edHintColor"
-        android:textSize="12sp"
-        android:textStyle="bold"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_title" />
+        app:layout_constraintTop_toBottomOf="@+id/arived_text" />
 
     <Button
         android:id="@+id/btn_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/butten_selecter"
         android:backgroundTint="@color/btnWhiteColor"
+        android:foreground="@drawable/butten_selecter"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,20 +108,21 @@
         android:id="@+id/btn_grey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/butten_selecter"
         android:backgroundTint="@color/btnGreyColor"
+        android:foreground="@drawable/butten_selecter"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_white"
         app:layout_constraintEnd_toStartOf="@+id/btn_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btn_white" />
 
+
     <Button
         android:id="@+id/btn_red"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/butten_selecter"
         android:backgroundTint="@color/btnRedColor"
+        android:foreground="@drawable/butten_selecter"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_white"
         app:layout_constraintEnd_toEndOf="parent"

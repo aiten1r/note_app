@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.domain.data.Notes
-import com.example.noteapp.R
 import com.example.noteapp.databinding.FragmentMainBinding
 import com.example.noteapp.presentation.adapters.NotesAdapter
 import com.example.noteapp.presentation.viewModel.NotesViewModule
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,29 +38,36 @@ class MainFragment : Fragment() {
 
         val adapter = NotesAdapter(onItemLongClick = { notes ->
             showNotesDeletDialog(notes)
-        }, onItemClick = { notes ->
-            val bundle = Bundle().apply {
-                putInt("id", notes.id)
-                putString("title", notes.title)
-                putString("description", notes.description)
-                putString("date", notes.date)
-                putString("color", notes.color)
-            }
-            findNavController().navigate(R.id.action_mainFragment_to_detailsFragment, bundle)
+        }, onItemClick = { notes->
+            val action  =  MainFragmentDirections.actionMainFragmentToDetailsFragment(
+                id = notes.id,
+                title = notes.title,
+                description = notes.description,
+                date = notes.date,
+                color = notes.color
+            )
+            findNavController().navigate(action)
         })
         binding.rvMain.adapter = adapter
 
-        lifecycleScope.launch {
-            notesViewModule.notesFlow.collectLatest { notes ->
-                if (notes.isNotEmpty()){
-                    Log.d("MainFragment", "Notes collected: $notes")
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                notesViewModule.notesState.collect { notes ->
+                    Log.d("NotesViewModel", "Received notes: $notes") // Добавить лог для отладки
                     adapter.submitList(notes)
                 }
             }
         }
 
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_detailsFragment)
+           val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(
+               id = 0,
+               title = "",
+               description = "",
+               date = "",
+               color = "grey"
+           )
+            findNavController().navigate(action)
         }
 
     }

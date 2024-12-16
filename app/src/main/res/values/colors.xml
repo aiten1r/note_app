@@ -20,5 +20,8 @@
     <color name="btnGreyColor">#191818</color>
     <color name="btnWhiteColor">#EBE4C9</color>
     <color name="btnRedColor">#571818</color>
+    <color name="textColorWhite">#A1865E</color>
+    <color name="textColorRed">#D88B02</color>
+    <color name="textColorGrey">#616161</color>
 
 </resources>
