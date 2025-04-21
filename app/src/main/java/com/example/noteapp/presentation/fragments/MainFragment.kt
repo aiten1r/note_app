@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.domain.data.Notes
-import com.example.noteapp.databinding.FragmentMainBinding
+import com.example.noteappaiditek.databinding.FragmentMainBinding
 import com.example.noteapp.presentation.adapters.NotesAdapter
 import com.example.noteapp.presentation.viewModel.NotesViewModule
 import kotlinx.coroutines.launch

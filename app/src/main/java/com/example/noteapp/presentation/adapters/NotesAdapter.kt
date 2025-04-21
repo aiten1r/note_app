@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.data.Notes
-import com.example.noteapp.R
-import com.example.noteapp.databinding.ActivityMainBinding
-import com.example.noteapp.databinding.MainItemBinding
+import com.example.noteappaiditek.R
+import com.example.noteappaiditek.databinding.ActivityMainBinding
+import com.example.noteappaiditek.databinding.MainItemBinding
 
 class NotesAdapter(
     private val onItemLongClick: (Notes) -> Unit,

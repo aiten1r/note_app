@@ -24,7 +24,7 @@
                 app:menu="@menu/toolbarmenu"
                 android:background="@color/topBarColor"
                 app:titleTextColor="@color/titleColor"
-                app:title="Заметки"
+                app:title="NoteApp"
                 app:titleCentered="true" />
 
         </com.google.android.material.appbar.AppBarLayout>

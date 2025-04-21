@@ -1,7 +1,6 @@
 package com.example.noteapp.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.domain.data.Notes
-import com.example.noteapp.R
-import com.example.noteapp.databinding.DetailsFragmentBinding
+import com.example.noteappaiditek.databinding.DetailsFragmentBinding
 import com.example.noteapp.presentation.viewModel.NotesViewModule
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -31,7 +29,7 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = DetailsFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -109,7 +107,6 @@ class DetailsFragment : Fragment() {
 
     private fun setupColorSelection() {
         // Установка начального состояния
-        binding.btnWhite.isSelected = true // Цвет по умолчанию
 
         binding.btnWhite.setOnClickListener {
             resetColorSelection()

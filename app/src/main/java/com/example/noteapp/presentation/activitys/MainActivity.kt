@@ -17,8 +17,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.noteapp.R
-import com.example.noteapp.databinding.ActivityMainBinding
+import com.example.noteappaiditek.R
+import com.example.noteappaiditek.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

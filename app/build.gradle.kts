@@ -2,14 +2,15 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id ("androidx.navigation.safeargs.kotlin")
+    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "com.example.noteapp"
+    namespace = "com.example.noteappaiditek"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.noteapp"
+        applicationId = "com.example.noteappaiditek"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -45,14 +46,18 @@ dependencies {
     implementation(project(":domain"))
 
     //navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.8.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.8.5")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.9")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.9")
 
     // Koin для Android
     implementation("io.insert-koin:koin-android:3.5.0") // Основная библиотека Koin
     implementation("io.insert-koin:koin-androidx-workmanager:3.5.0") // (если используете WorkManager)
     implementation("io.insert-koin:koin-androidx-navigation:3.5.0") // Для навигации
     implementation("io.insert-koin:koin-androidx-compose:3.5.0")
+
+    //FireBase
+    implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
+    implementation("com.google.firebase:firebase-analytics")
 
 
     implementation(libs.androidx.core.ktx)
