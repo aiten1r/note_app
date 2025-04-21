@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("org.jetbrains.kotlin.kapt")
     id ("androidx.navigation.safeargs.kotlin")
     id("com.google.gms.google-services")
 }
@@ -58,6 +59,10 @@ dependencies {
     //FireBase
     implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation ("com.google.firebase:firebase-auth")
+
+    //splashScreen
+    implementation("androidx.core:core-splashscreen:1.0.1")
 
 
     implementation(libs.androidx.core.ktx)

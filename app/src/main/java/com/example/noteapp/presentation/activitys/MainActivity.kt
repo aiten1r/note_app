@@ -8,6 +8,7 @@ import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -27,38 +28,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContentView(binding.root)
 
         // Установите Toolbar как ActionBar
-        setSupportActionBar(binding.toolbar)
 
         // Связываем NavController с NavHostFragment
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHostFragment.navController
 
         // Настраиваем ActionBar
-        NavigationUI.setupWithNavController(binding.navigationView, navController)
 
 //        val appBarConfiguration = AppBarConfiguration(
 //            setOf(R.id.mainFragment), // Главные фрагменты (где гамбургер-меню вместо "Назад")
 //            binding.drawerLayout
 //        )
-        setupActionBarWithNavController(navController)
-
-        binding.toolbar.setNavigationOnClickListener {
-            binding.drawerLayout.openDrawer(GravityCompat.START)
-        }
-
-        navController.addOnDestinationChangedListener{_,destination,_->
-            when (destination.id){
-                R.id.mainFragment ->{
-                    binding.toolbar.visibility = View.VISIBLE
-                }
-                R.id.detailsFragment ->{
-                    binding.toolbar.visibility = View.GONE
-                }
-            }
-        }
     }
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
