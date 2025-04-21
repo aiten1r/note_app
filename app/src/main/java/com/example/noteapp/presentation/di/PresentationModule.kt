@@ -17,7 +17,9 @@ val presentationModule = module {
     viewModel {
         AuthViewModel(
             registrationUseCase = get(),
-            loginUseCase = get()
+            loginUseCase = get(),
+            saveAuthStatusUsceCase = get(),
+            isUserAuthorizedUseCase = get()
         )
     }
 }
